@@ -39,12 +39,13 @@ class MailClient():
 if __name__== "__main__":
     mail_from = r"送信するアドレスを入れてください"
     password = r"ログインパスワードを入れてください"
-    mail_to = r"宛先のアドレスを入れてください"
-    mail_subject = r"件名テスト"
-    mail_body = r"本文テスト"
     smtp_host = r"実際の SMTP ホスト名に置き換えてください"
     smtp_port = "465" #省略可( SSL の場合は通常 465、TLS の場合は 587)
     use_ssl = True #省略可( SSL を使う場合は True、TLS の場合は False)
+
+    mail_to = r"宛先のアドレスを入れてください"
+    mail_subject = r"件名テスト"
+    mail_body = r"本文テスト"
 
     #以下のイメージでapiを使います
     mail = MailClient(mail_from, password, smtp_host, smtp_port, use_ssl)
