@@ -31,9 +31,9 @@ class MailClient():
             smtpobj.quit()
 
         except Exception as e:
-            return False,str(traceback.format_exc())
+            return {"status": False, "message": str(traceback.format_exc())}
 
-        return True,"success"
+        return {"status": True, "message": "success"}
 
 # 直接起動の場合はこちらの関数を実行
 if __name__== "__main__":
