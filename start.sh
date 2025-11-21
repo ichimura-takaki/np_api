@@ -1,2 +1,2 @@
 #!/bin/bash
-python send_mail.py
+python3 send_mail.py
