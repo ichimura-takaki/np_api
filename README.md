@@ -24,11 +24,10 @@ const status = result.status; //送信成功でtrue ,送信失敗でfalse を返
 const msg = result.msg; //送信成功で"success" ,送信失敗でエラーメッセージ を返す
 
 Logger.log(status,msg) //結果表示してます。(本番は書かなくてOK)
-//-----------------------------------------------------------------------------------------
-
-//以下の方法でも結果を見れます
+```
+以下の方法でも結果を見れます
+```
 const mail = MailClient(mail_from, password, smtp_host, smtp_port, use_ssl); //送信側の設定
 const {status,msg} = mail.send(mail_to, mail_subject, mail_body); //メール送って即見れる
 Logger.log(status,msg) //結果表示してます。(本番は書かなくてOK)
 ```
-
