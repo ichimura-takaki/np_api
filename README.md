@@ -1,11 +1,11 @@
-#np_api
+# np_api
 
-#アジェンダ
+# アジェンダ
 gas用のapiです。railwayをサーバとしています。
 pythonのfastAPIを使用して記述されてます。
 gas側での使い方を記述します。
 
-#mail機能
+# mail機能
 MAIL_CONIFIG内のmail_from,password,smtp_hostだけ修正してください(6-8行目くらい)
 こちらは最初に1回だけ書けばいい初期設定です。
 ```初期設定.js
