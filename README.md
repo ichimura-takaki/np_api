@@ -65,7 +65,6 @@ function main(){
     
     //結果の表示
     Logger.log(result);
-    return result;
   }
 }
 ```
