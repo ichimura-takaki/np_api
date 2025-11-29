@@ -52,6 +52,10 @@ function main(){
       "subject": "Test Subject", //メール件名
       "body": "This is a test email" //メール本文
     }
+
+    //初期設定済みでメアドだけ変更とかなら以下の書き方でもOK
+    //payload.mail_to.address = "reception@gmail.com"
+
     //更新の保存
     options.payload = JSON.stringify(payload);
 
