@@ -45,6 +45,6 @@ def send(request: dict = Body(...)):
         server.sendmail(config["mail_from"], [mail_to["mail_to"]], msg.as_string())
         server.quit()
         return {"status": True, "message": "success"}
-    except Exception:
-        return {"status": False, "message": traceback.format_exc()}
+    except Exception as e:
+        return {"status": False, "message": str(e)+"\n"+traceback.format_exc()}
     
