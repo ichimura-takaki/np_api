@@ -10,7 +10,7 @@ gas側での使い方を記述します。
 ```
 //初期初期設定なので一回書けばOK
 function config() {
-  const apiUrl = "https://api-server_URL"; //apiサーバのURL
+  const apiUrl = "https://api-server_URL"+"/mail/send"; //apiサーバのURL「api-server_URL」を書き換えてください
   const apiKey = "your_api_key"; // 設定した API_KEY
   
   const payload = {
