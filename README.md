@@ -21,7 +21,9 @@ function config() {
       "smtp_port": 465,//SMTPポート(デフォルト値)
       "use_ssl": true //SSL使用有無(true/false) (デフォルト値true)
     },
-    "mail_to": {}
+    "mail_to": {
+      //mail_fromの要領で事前にココに書いてもOK
+    }
   };
 
   const options = {
