@@ -1,71 +1,70 @@
 # np_api
 
 ## アジェンダ
-gas用のapiです。railwayをサーバとしています。
+gas用のapiです。railwayをサーバとしています。→railwayでsmtp使えない！？
 pythonのfastAPIを使用して記述されてます。
 gas側での使い方を記述します。
 
 ## mail機能
-MAIL_CONIFIG内のmail_from,password,smtp_hostだけ修正してください(6-8行目くらい)
-こちらは最初に1回だけ書けばいい初期設定です。
-```初期設定.js
-// ===== Mail 初期化 =====
-const API_URL = "https://your-railway-url";
-const API_KEY = "your_secret_api_key";
+プログラム横のコメントがある場合、そこは都度書き換え必須ポイントです。
+```
+//初期初期設定なので一回書けばOK
+function mail_config() {
+  const apiUrl = "https://api-server_URL"+"/mail/send"; //apiサーバのURL「api-server_URL」を書き換えてください
+  const apiKey = "your_api_key"; // 設定した API_KEY
+  
+  const payload = {
+    "mail_from": {
+      "address": "send@api.com",//送信元メールアドレス
+      "password": "password123",//送信元メールアドレスのパスワード
+      "smtp_host": "smtp1234.smpt_server.jp",//SMTPサーバー
+      "smtp_port": 465,//SMTPポート(デフォルト値)
+      "use_ssl": true //SSL使用有無(true/false) (デフォルト値true)
+    },
+    "mail_to": {
+      //mail_fromの要領で事前にココに書いてもOK
+    }
+  };
 
-const MAIL_CONFIG = {
-  mail_from: "送信したいメアド",
-  password: "ログイン用パスワード",
-  smtp_host: "SMTPのホスト名を入れてください",
-  smtp_port: 465,　//デフォルト値です。場合によって変えてください。
-  use_ssl: true　//デフォルト値です。場合によって変えてください。
-};
-
-//ココから下は触れる必要はありません。コピペして貼り付けてください。
-// ===== Mail 初期化 =====
-function initializeMail() {
   const options = {
     method: "post",
     contentType: "application/json",
-    headers: { "api-key": API_KEY },
-    payload: JSON.stringify(MAIL_CONFIG),
+    payload: JSON.stringify(payload),
+    headers: {
+      "x-api-key": apiKey
+    },
     muteHttpExceptions: true
   };
-  
-  const response = UrlFetchApp.fetch(API_URL + "/mail/config", options);
-  Logger.log(JSON.parse(response.getContentText()));
+  return {apiUrl,options,payload}
 }
 
+//実際の処理部分
+function main(){
 
-// ===== メール送信 =====
-function send_mail(mail_to, mail_subject, mail_body) {
-  const payload = {
-    mail_to: mail_to,
-    mail_subject: mail_subject,
-    mail_body: mail_body
-  };
+  //ループ前に書くおまじない
+  const {apiUrl,options,payload}=mail_config();
 
-  const options = {
-    method: "post",
-    contentType: "application/json",
-    headers: { "api-key": API_KEY },
-    payload: JSON.stringify(payload),
-    muteHttpExceptions: true
-  };
+  //実際の処理はループするっしょ！？！？
+  for(let i=0;i<1;i++){
+    //送信先の更新
+    payload.mail_to = {
+      "address": "reception@gmail.com", //送信先メールアドレス
+      "subject": "Test Subject", //メール件名
+      "body": "This is a test email" //メール本文
+    }
 
-  const response = UrlFetchApp.fetch(API_URL + "/mail/send", options);
-  return JSON.parse(response.getContentText());
+    //初期設定済みでメアドだけ変更とかなら以下の書き方でもOK
+    //payload.mail_to.address = "reception@gmail.com"
+
+    //更新の保存
+    options.payload = JSON.stringify(payload);
+
+    //処理開始&結果の取得
+    const response = UrlFetchApp.fetch(apiUrl, options);
+    const result = JSON.parse(response.getContentText());
+    
+    //結果の表示
+    Logger.log(result);
+  }
 }
 ```
-
-実際に使用する際は以下の要領で使用してください。
-```使用例.js
-function test() {
-  // メール送信
-  const mail_result = send_mail(
-    "user@example.com",
-    "テスト件名",
-    "テスト本文"
-  );
-  Logger.log("Mail:", mail_result);
-}
