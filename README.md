@@ -9,7 +9,7 @@ gas側での使い方を記述します。
 プログラム横のコメントがある場合、そこは都度書き換え必須ポイントです。
 ```
 //初期初期設定なので一回書けばOK
-function config() {
+function mail_config() {
   const apiUrl = "https://api-server_URL"+"/mail/send"; //apiサーバのURL「api-server_URL」を書き換えてください
   const apiKey = "your_api_key"; // 設定した API_KEY
   
@@ -42,7 +42,7 @@ function config() {
 function main(){
 
   //ループ前に書くおまじない
-  const {apiUrl,options,payload}=config();
+  const {apiUrl,options,payload}=mail_config();
 
   //実際の処理はループするっしょ！？！？
   for(let i=0;i<1;i++){
